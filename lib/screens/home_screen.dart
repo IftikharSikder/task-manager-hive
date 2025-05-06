@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       body: ValueListenableBuilder(
         valueListenable: taskManagerBox.listenable(),
         builder: (context, box, _) {
-          return ListView.builder(
+          return box.isEmpty?Center(child: Text("No data found",style: TextStyle(fontSize: 18),)):ListView.builder(
             itemCount: box.length,
             itemBuilder: (context, index) {
               final task = box.getAt(index);
@@ -48,9 +48,9 @@ class HomeScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder:
                               (context) => ViewTaskScreen(
-                                title: task.title,
-                                description: task.description,
-                              ),
+                            title: task.title,
+                            description: task.description,
+                          ),
                         ),
                       );
                     },
@@ -110,14 +110,14 @@ class HomeScreen extends StatelessWidget {
                                   actions: [
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceAround,
                                       children: [
                                         OutlinedButton(
                                           style: OutlinedButton.styleFrom(
                                             backgroundColor: Colors.red,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                             ),
                                           ),
                                           onPressed: () {
@@ -135,7 +135,7 @@ class HomeScreen extends StatelessWidget {
                                             backgroundColor: Colors.blue,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                             ),
                                           ),
                                           onPressed: () {
@@ -144,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                                               TaskManager newTask = TaskManager(
                                                 title: titleController.text,
                                                 description:
-                                                    descriptionController.text,
+                                                descriptionController.text,
                                               );
                                               final taskManagerBox = Hive.box(
                                                 "Task Manager",
